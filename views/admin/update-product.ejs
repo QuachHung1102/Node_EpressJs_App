@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/forms.css" />
+  <link rel="stylesheet" href="/css/product.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <%- include('../includes/navigation.ejs') %>
+    </header>
+    <main>
+      <form class="product-form" action="/api/v1/admin/update-product/<%= product.id %>" method="post">
+        <div class="form-control">
+          <label for="productName">Product Name</label>
+          <input type="text" name="productName" id="productName" placeholder=<%=product.productName %>/>
+        </div>
+        <div class="form-control">
+          <label for="imageUrl ">Img</label>
+          <input type="text" name="imageUrl" id="imageUrl" placeholder=<%=product.imageUrl %> />
+        </div>
+        <div class="form-control">
+          <label for="price">Price</label>
+          <input type="number" name="price" id="price" placeholder=<%=product.price %>/>
+        </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" cols="30" rows="5"
+            placeholder="<%= product.description %>"></textarea>
+        </div>
+        <button type="submit">
+          <%= updating ? "Edit Product" : "Add Product" %>
+        </button>
+      </form>
+    </main>
+  </body>
+<%- include('../includes/end.ejs') %>

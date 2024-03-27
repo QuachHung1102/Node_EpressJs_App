@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/head.ejs')  %>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <%- include('../includes/navigation.ejs') %>
+    </header>
+    <main>
+      <div style="text-align: center">
+        <h1>Welcome to Awesome World!</h1>
+        <div class="card__image">
+          <img src="/images/products/book1.jpg" alt="A book" />
+        </div>
+      </div>
+      <script>
+        window.onload = () => {
+          setTimeout(() => {
+            window.location.href = "/api/v1/admin/add-product";
+          }, 3000);
+        };
+      </script>
+    </main>
+  </body>
+<%- include('../includes/end.ejs')  %>
+

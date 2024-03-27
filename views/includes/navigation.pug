@@ -1,0 +1,20 @@
+header.main-header
+  nav.main-header__nav 
+    ul.main-header__item-list 
+      li.main-header__item 
+        a(href="/api/v1/shop" class=(activeClass==="shop" ? "active" : "")) Shop
+      li.main-header__item
+        a(href="/api/v1/shop/products" class=(activeClass==="products" ? "active" : "")) Products
+      li.main-header__item
+        a(href="/api/v1/shop/cart" class=(activeClass==="cart" ? "active" : "")) Cart
+      li.main-header__item
+        a(href="/api/v1/shop/orders" class=(activeClass==="orders" ? "active" : "")) Orders 
+      li.main-header__item
+        a(href="/api/v1/admin/product-list" class=(activeClass==="product-list" ? "active" : "")) Admin Product
+
+
+        //- if pageTitle === "Products"
+        //-   a(href="/api/v1/admin/add-product") Add Product
+        //-   //- a(href="/api/v1/shop/add-product" class=(path==="/admin/add-product" ? "active" : "")) Add Product
+        //- else 
+        //-   a(href="/api/v1/shop/products") Products

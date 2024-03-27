@@ -1,0 +1,11 @@
+extends ../layouts/main-layout.pug
+block styles 
+block content 
+  main.centered
+    h1 #{product.productName}
+    hr
+    div
+      img(src=`/images/products/${product.imageUrl}`, alt=product.productName,  style="width: 50%; object-fit: content")
+    h2 #{product.price} 
+    p #{product.description}
+    include ../includes/add-product-to-card.pug

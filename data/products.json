@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "productName": "Book",
+    "imageUrl": "book1.jpg",
+    "price": "20.00",
+    "description": "Sách giáo khoa"
+  },
+  {
+    "id": "2",
+    "productName": "Super Tenga",
+    "imageUrl": "ShinTenga.jpg",
+    "price": "10.000",
+    "description": "Dụng cụ học tập rất cần thiết cho các pé é hé hé."
+  },
+  {
+    "id": "3",
+    "productName": "Pen",
+    "imageUrl": "Pen1.jpg",
+    "price": "50",
+    "description": " Cây bút máy tốt."
+  }
+]

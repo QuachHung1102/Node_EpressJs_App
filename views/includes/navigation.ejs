@@ -1,0 +1,19 @@
+<nav class="main-header__nav">
+  <ul class="main-header__item-list">
+    <li class="main-header__item">
+      <a class="<%= activeClass === "shop" ? "active" : "" %>" href="/api/v1/shop">Shop</a>
+    </li>
+    <li class="main-header__item">
+      <a class="<%= activeClass === "products" ? "active" : "" %>" href="/api/v1/shop/products">Products</a>
+    </li>
+    <li class="main-header__item">
+      <a class="<%= activeClass === "cart" ? "active" : "" %>" href="/api/v1/shop/cart">Cart</a>
+    </li>
+    <li class="main-header__item">
+      <a class="<%= activeClass === "orders" ? "active" : "" %>" href="/api/v1/shop/orders">Orders</a>
+    </li>
+    <li class="main-header__item">
+      <a class="<%= activeClass === "product-list" ? "active": "" %>" href="/api/v1/admin/product-list">Admin Product</a>
+    </li>
+  </ul>
+</nav>

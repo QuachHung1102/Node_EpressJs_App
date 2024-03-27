@@ -1,0 +1,14 @@
+extends ../layouts/main-layout.pug
+block styles 
+block content
+  main 
+    div(style=("text-align:center;"))
+      h1 Welcome to Awesome World!
+      div.card__image
+        img(src="/images/products/book1.jpg" style ="width: 300px" alt="A book")
+  script.
+    window.onload = function() {
+      setTimeout(() => {
+        window.location.href = "/api/v1/admin/add-product";
+      }, 3000);
+    };

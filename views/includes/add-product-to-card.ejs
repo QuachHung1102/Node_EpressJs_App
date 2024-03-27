@@ -1,0 +1,5 @@
+<form action="/api/v1/shop/add-to-cart" method="post">
+  <input type="hidden" name="productId" value="<%= product.id %>">
+  <input type="hidden" name="productPrice" value="<%= product.price %>">
+  <button class="btn" type="submit">Add to cart</button>
+</form>

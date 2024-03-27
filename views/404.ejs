@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head.ejs') %>
+  <title><%= pageTitle %></title>
+</head>
+  <body>
+    <header class="main-header">
+      <%- include('includes/navigation.ejs')  %>
+    </header>
+    <main>
+      <h1 style="text-align: center">Page not Found</h1>
+    </main>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        setTimeout(function () {
+          window.location.href = "http://localhost:3000/api/v1/shop/shop";
+        }, 3000);
+      };
+    </script>
+  </body>
+<%- include('includes/end.ejs')  %>

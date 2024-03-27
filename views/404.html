@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found</title>
+  </head>
+  <body>
+    <h1>Không tìm thấy trang!</h1>
+    <p>Tự động điều hướng trong 3 giây</p>
+    <script type="text/javascript">
+      window.onload = function () {
+        setTimeout(function () {
+          window.location.href = "http://localhost:3000/api/v1/home";
+        }, 3000);
+      };
+    </script>
+  </body>
+</html>

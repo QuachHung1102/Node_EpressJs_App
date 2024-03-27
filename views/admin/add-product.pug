@@ -1,0 +1,45 @@
+extends ../layouts/main-layout.pug
+
+block styles 
+  link(rel="stylesheet" href="/css/product.css")
+  link(rel="stylesheet" href="/css/forms.css")
+block content 
+  main
+    form(action="/api/v1/admin/add-product" method="post").product-form
+      .form-control
+        label(for="productName") Add Product
+        input(type="text" name="productName" id="productName" placeholder="Enter product")
+      .form-control
+        label(for="imageUrl") Image
+        input(type="text" name="imageUrl" id="imageUrl" placeholder="Image") 
+      .form-control
+        label(for="price") Price
+        input(type="number" name="price" id="price" placeholder="Price" step="0.01")
+      .form-control 
+        label(for="description") Description
+        textarea(name="description" id="description" cols="30" rows="5") 
+      button(type="submit") Add Product
+
+//- doctype html
+//- html(lang="en")
+//-   head
+//-     meta(charset="UTF-8")
+//-     meta(name="viewport" content="width=device-width, initial-scale=1.0")
+//-     link(rel="stylesheet" href="/css/main.css")
+//-     link(rel="stylesheet" href="/css/product.css")
+//-     link(rel="stylesheet" href="/css/forms.css")
+//-     title #{pageTitle}
+//-   body
+//-     header.main-header
+//-       nav.main-header__nav 
+//-         ul.main-header__item-list 
+//-           li.main-header__item 
+//-             a.active(href="/api/v1/home") Home
+//-           li.main-header__item
+//-             a(href="/api/v1/shop/products") Product
+//-     main
+//-       form(action="/api/v1/admin/add-product" method="post").product-form
+//-         .form-control
+//-           label(for="product") Add Product 
+//-           input(type="text" name="product" id="product" placeholder="Enter product") 
+//-           button(type="submit") Add Product

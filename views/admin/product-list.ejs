@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/head.ejs')  %>
+    <link rel="stylesheet" href="/css/forms.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <%- include('../includes/navigation.ejs') %>
+    </header>
+    <main>
+      <div class="grid">
+        <% if (prods.length > 0) { %> 
+          <% prods.forEach(product => { %>
+            <article class="card product-item">
+              <header class="card__header">
+                <h1 class="product__title"><%= product.productName %></h1>
+              </header>
+              <div class="card__image">
+                <img class="product-img" src="/images/products/<%= product.imageUrl %>" alt=<%= product.productName %> />
+              </div>
+              <div class="card__content">
+                <h2 class="product__price"><%= product.price %></h2>
+                <p class="product__description"><%= product.description %></p>
+              </div>
+              <div class="card__actions">
+                <a class="btn" href="/api/v1/admin/update-product/<%= product.id %>?updateMode=true">Edit</a>
+                <form action="/api/v1/admin/delete-product" method="post">
+                  <input type="hidden" name="productId" value="<%= product.id %>">
+                  <button class="btn" type="submit">Delete</button>
+                </form>
+              </div>
+            </article>
+          <% }) %> 
+        <% } else { %>
+          <h1>No products available</h1>
+        <% } %>
+      </div>
+    </main>
+  </body>
+<%- include('../includes/end.ejs')  %>

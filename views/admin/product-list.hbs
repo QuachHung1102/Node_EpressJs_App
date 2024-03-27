@@ -1,0 +1,35 @@
+<main>
+  <div class="grid">
+    {{#if hasProducts}}
+      {{#each prods}}
+        <article class="card product-item">
+          <header class="card__header">
+            <h1 class="product__title">{{this.productName}}</h1>
+          </header>
+          <div class="card__image">
+            <img
+              src="/images/products/{{this.imageUrl}}"
+              alt={{this.productName}}
+            />
+          </div>
+          <div class="card__content">
+            <h2 class="product__price">{{this.price}}</h2>
+            <p class="product__description">{{this.description}}</p>
+          </div>
+          <div class="card__actions">
+            <a
+              class="btn"
+              href="/api/v1/admin/update-product/{{this.id}}?updateMode=true"
+            >Edit</a>
+            <form action="/api/v1/admin/delete-product" method="post">
+              <input type="hidden" name="productId" value="{{product.id}}" />
+              <button class="btn" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      {{/each}}
+    {{else}}
+      <h1>No products available</h1>
+    {{/if}}
+  </div>
+</main>
