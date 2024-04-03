@@ -16,7 +16,8 @@ const getAddProduct = async (req, res) => {
 };
 
 const getListProduct = async (req, res) => {
-  Product.findAll()
+  req.user.getProducts()
+    // Product.findAll()
     .then((products) => {
       res.status(200).render("./admin/product-list", {
         prods: products,
@@ -32,23 +33,42 @@ const getListProduct = async (req, res) => {
 
 const postAddProduct = async (req, res) => {
   const { productName, imageUrl, price, description } = req.body;
-  Product.create({
-    productName,
-    price,
-    description,
-    imageUrl,
-  })
+
+  // Cách 2
+  req.user
+    .createProduct({
+      productName,
+      price,
+      description,
+      imageUrl,
+    })
     .then((result) => {
       console.log(result);
       res.status(302).redirect("../shop/products");
     })
     .catch((err) => console.log(err));
+
+  // Cách 1
+  // Product.create({
+  //   productName,
+  //   price,
+  //   description,
+  //   imageUrl,
+  //   userId: req.user.id,
+  // })
+  //   .then((result) => {
+  //     console.log(result);
+  //     res.status(302).redirect("../shop/products");
+  //   })
+  //   .catch((err) => console.log(err));
 };
 
 const getUpdateProduct = async (req, res) => {
   const updateMode = req.query.updateMode;
   const id = req.params.id;
-  Product.findAll({ where: { id: id } })
+  req.user
+    .getProducts({ whre: { id: id } })
+    // Product.findAll({ where: { id: id } })
     .then((products) => {
       if (products.at(0)) {
         res.status(200).render("admin/update-product", {
@@ -60,19 +80,6 @@ const getUpdateProduct = async (req, res) => {
           updating: updateMode,
           product: products.at(0),
         });
-      } else {
-        res.status(404).send(
-          `
-          <html>
-            <head>
-              <title>Load trang Admin</title>
-            </head>
-            <body>
-              <h1>Admin!</h1>
-            </body>
-          </html>
-          `
-        );
       }
     })
     .catch((err) => {
@@ -89,7 +96,10 @@ const updateProduct = async (req, res) => {
       product.price = price;
       product.description = description;
       product.imageUrl = imageUrl;
-      product.save();
+      return product.save();
+    })
+    .then((result) => {
+      console.log(`Updated product: ${result.productName}`);
       res.status(302).redirect("/api/v1/admin/product-list");
     })
     .catch((error) => {
@@ -99,9 +109,30 @@ const updateProduct = async (req, res) => {
 
 const postDeleteProduct = async (req, res) => {
   const productId = req.body.productId;
-  Product.deleteById(productId, () => {
-    res.status(204).redirect("/api/v1/admin/product-list");
-  });
+  Product.destroy({ where: { id: productId } }) // findByPK rồi xóa cũng đc đéo sao cả
+    .then((result) => {
+      console.log(`Deleted!`);
+      res.status(204).redirect("/api/v1/admin/product-list");
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(204)
+        .send(`<script>window.alert("Xóa không thành công")</script>`);
+    });
+
+  // Product.findByPk(productId)
+  //   .then((product) => {
+  //     return product.destroy();
+  //   })
+  //   .then((result) => {
+  //     console.log(`Xóa thành công`);
+  //     res.status(204).redirect("/api/v1/admin/product-list");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.status(204).send(`Xóa không thành công`);
+  //   });
 };
 
 module.exports = {

@@ -25,31 +25,31 @@ const getProductList = async (req, res) => {
 };
 
 const getCart = async (req, res) => {
-  Cart.getCart((cart) => {
-    Product.fetchAll((productList) => {
-      const cartProducts = new Array();
-      for (const product of productList) {
-        const cartProductData = cart.productList.find(
-          (prod) => prod.id === product.id
-        );
-        if (cartProductData) {
-          cartProducts.push({
-            productData: product,
-            quantity: cartProductData.quantity,
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart
+        .getProducts()
+        .then((products) => {
+          res.status(200).render("./shop/cart", {
+            cartProducts: products,
+            cartProductsLength: products.length > 0,
+            pageTitle: "Your Cart",
+            path: "/cart",
+            activeClass: "cart",
+            activeFormCss: true,
+            activeProductsCss: true,
           });
-        }
-      }
-      res.status(200).render("./shop/cart", {
-        cartProducts: cartProducts,
-        cartProductsLength: cartProducts.length > 0,
-        pageTitle: "Your Cart",
-        path: "/cart",
-        activeClass: "cart",
-        activeFormCss: true,
-        activeProductsCss: true,
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(404).send(`Error: ${err.message}`);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(`Error: ${err.message}`);
     });
-  });
 };
 
 const getOders = async (req, res) => {
