@@ -85,10 +85,39 @@ const getProductDetail = async (req, res) => {
 
 const addToCart = async (req, res) => {
   const { productId, productPrice } = req.body;
-  Product.findById(productId, (product) => {
-    Cart.addProduct(productId, productPrice);
-  });
-  res.status(201).redirect("/api/v1/shop/cart");
+  let fetchedCart;
+  req.user
+    .getCart()
+    .then((cart) => {
+      fetchedCart = cart;
+      return cart.getProducts({ where: { id: productId } });
+    })
+    .then((prodcuts) => {
+      let product;
+      if (prodcuts.length > 0) {
+        product = prodcuts.at(0);
+      }
+      let newQuantity = 1;
+      if (product) {
+      }
+      return Product.findByPk(productId)
+        .then((product) => {
+          return fetchedCart.addProduct(product, {
+            through: { quantity: newQuantity },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(201).redirect(`Error: ${err.message}`);
+        });
+    })
+    .then(() => {
+      res.status(201).redirect("/api/v1/shop/cart");
+    })
+    .catch((err) => {
+      res.status(500).send(`Error: ${err.message}`);
+      console.log(err);
+    });
 };
 
 const deleteProduct = async (req, res) => {
